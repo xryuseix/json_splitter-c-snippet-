@@ -9,15 +9,12 @@ import json
 file = open('./sample.json', 'r')
 json_dict = json.load(file)
 
-# print(json_dict['baz']['foo'])
-
 keys = json_dict.keys()
 
-print(keys)
-
 for k in keys:
-    file_pass = './' + k + '.cpp'
-    print(file_pass)
-    #書き込むファイルを開く
-    file_write = open(file_pass, 'w')
-    json.dump(json_dict[k], file_write)
+    file_pass = './snippets/' + k + '.cpp'
+    with open(file_pass, mode='w') as f:
+        f.write('// ' + json_dict[k]['description'] + '\n\n')
+        for st in json_dict[k]['body']:
+            f.write(st + '\n')
+
