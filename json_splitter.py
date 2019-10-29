@@ -6,7 +6,7 @@
 import json
 
 # jsonを辞書に変更
-file = open('./sample.json', 'r')
+file = open('./c++snippet.json', 'r')
 json_dict = json.load(file)
 
 keys = json_dict.keys()
