@@ -18,3 +18,5 @@ for k in keys:
         for st in json_dict[k]['body']:
             f.write(st + '\n')
 
+# Boyre-Moore Quote from https://www.yasuhisay.info/entry/20091215/1260835159
+# Union-Find https://www.youtube.com/watch?v=zV3Ul2pA2Fw
