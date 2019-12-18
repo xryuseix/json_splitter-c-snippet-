@@ -1,49 +1,3 @@
-/*
-C++スニペット一覧
-
-gcd...ユークリッドの互除法
-next_permitation...next_permitation
-lcm...最小公倍数
-nlcm...n個の値の最小公倍数
-union_find...Union-find木をつくる
-eratosthenes...エラトステネスの篩
-quicksort...クイックソート
-ngcd...要素数がnの最大公約数
-sanjihouteishiki...三次方程式 ax^3+bx^2+cx+d=0 を解く
-prime_dissasembly...素因数分解
-isPrime...素数判定（ O(√N) ）
-hakidashi...掃き出し法
-nijihouteishiki...二次方程式の解を求める
-binary_search...二分探索
-yakusu_enum...約数列挙
-mnmod...mのn乗modPを計算
-stringcount...文字列中の特定の文字の個数をカウント
-zip...一次元座標圧縮
-bitsearch...bit全探索
-combination...組み合わせ・nCkを求める
-modint...modを勝手に取ってくれる構造体
-knapsack...ナップサック問題を解く
-lcs...最長共通部分列問題を解く
-template...ICPCなどテンプレート
-gpriority_queue...昇順に取り出せるのpriority_queue
-bellman_ford...ベルマンフォード法 O(VE)
-topological_sort...トポロジカルソート
-dijkstra...ダイクストラ法 O(ElogV)
-warshall_floyd...ワーシャルフロイド法
-intersect...setのintersect
-digitsum...桁和
-indexdistabce...特定の文字の配列内の添字
-gyakugen...逆元の計算
-BoyerMoore...BoyerMoore法(文字列探索アルゴリズム)
-kruskal...クラスカル法
-hutei...不定方程式のを解く
-SegmentTree...セグメント木
-lis...LIS(最長増加部分列)を解く
-conlis...Continue LIS(最長連続増加部分列)を解く
-extgcd...拡張ユークリッドの互助法を解く
-StronglyConnectedComponent...強連結成分分解
-CoordinateCompression...二次元座標圧縮
-*/
 {
 	"gcd": {
 		"prefix": "gcd",
@@ -1304,7 +1258,7 @@ CoordinateCompression...二次元座標圧縮
 			"\t\t}",
 			"\t\tcout << endl;",
 			"\t}",
-			"};",
+			"};"
 		],
 		"description": "強連結成分分解"
 	},
