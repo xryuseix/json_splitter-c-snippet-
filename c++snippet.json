@@ -1,3 +1,49 @@
+/*
+C++スニペット一覧
+
+gcd...ユークリッドの互除法
+next_permitation...next_permitation
+lcm...最小公倍数
+nlcm...n個の値の最小公倍数
+union_find...Union-find木をつくる
+eratosthenes...エラトステネスの篩
+quicksort...クイックソート
+ngcd...要素数がnの最大公約数
+sanjihouteishiki...三次方程式 ax^3+bx^2+cx+d=0 を解く
+prime_dissasembly...素因数分解
+isPrime...素数判定（ O(√N) ）
+hakidashi...掃き出し法
+nijihouteishiki...二次方程式の解を求める
+binary_search...二分探索
+yakusu_enum...約数列挙
+mnmod...mのn乗modPを計算
+stringcount...文字列中の特定の文字の個数をカウント
+zip...一次元座標圧縮
+bitsearch...bit全探索
+combination...組み合わせ・nCkを求める
+modint...modを勝手に取ってくれる構造体
+knapsack...ナップサック問題を解く
+lcs...最長共通部分列問題を解く
+template...ICPCなどテンプレート
+gpriority_queue...昇順に取り出せるのpriority_queue
+bellman_ford...ベルマンフォード法 O(VE)
+topological_sort...トポロジカルソート
+dijkstra...ダイクストラ法 O(ElogV)
+warshall_floyd...ワーシャルフロイド法
+intersect...setのintersect
+digitsum...桁和
+indexdistabce...特定の文字の配列内の添字
+gyakugen...逆元の計算
+BoyerMoore...BoyerMoore法(文字列探索アルゴリズム)
+kruskal...クラスカル法
+hutei...不定方程式のを解く
+SegmentTree...セグメント木
+lis...LIS(最長増加部分列)を解く
+conlis...Continue LIS(最長連続増加部分列)を解く
+extgcd...拡張ユークリッドの互助法を解く
+StronglyConnectedComponent...強連結成分分解
+CoordinateCompression...二次元座標圧縮
+*/
 {
 	"gcd": {
 		"prefix": "gcd",
@@ -582,7 +628,7 @@
 	"bellman_ford": {
 		"prefix": "bellman_ford",
 		"body": [
-			"//頂点fromから頂点toへのコストcostの辺",
+			"// 頂点fromから頂点toへのコストcostの辺",
 			"struct edge {",
 				"\tint from;",
 				"\tint to;",
@@ -591,9 +637,9 @@
 			"",
 			"class Bellman_Ford{",
 			"public:",
-				"\tvector<edge> es; //辺",
-				"\tvector<int> d; ///d[i]...頂点sから頂点iまでの最短距離",
-				"\tint V, E; //Vは頂点数、Eは辺数",
+				"\tvector<edge> es; // 辺",
+				"\tvector<int> d; // d[i]...頂点sから頂点iまでの最短距離",
+				"\tint V, E; // Vは頂点数、Eは辺数",
 				"",
 				"\tBellman_Ford(int v, int e) {",
 					"\t\tV = v;",
@@ -606,7 +652,7 @@
 					"\t\tes.push_back(ed);",
 				"\t}",
 				"",
-				"\t//s番目の頂点から各頂点への最短距離を求める",
+				"\t// s番目の頂点から各頂点への最短距離を求める",
 				"\tvoid shortest_path(int s) {",
 					"\t\tfor(int i = 0; i < V; i++) {",
 						"\t\t\td[i] = INF;",
@@ -629,13 +675,13 @@
 					"\t\tfor(int i = 0; i < V; i++) {",
 						"\t\t\td[i] = 0;",
 					"\t\t}",
-					"\t\tfor (int i = 0; i < V; i++) {",
+					"\t\tfor (int i = 0; i < 3*V; i++) {",
 						"\t\t\tfor(int j = 0; j < E; j++) {",
 							"\t\t\t\tedge e = es[j];",
 							"\t\t\t\tif(d[e.to] > d[e.from] + e.cost) {",
 								"\t\t\t\t\td[e.to] = d[e.from] + e.cost;",
 								"",
-								"\t\t\t\t\t//n回目にも更新があるなら負の閉路が存在する",
+								"\t\t\t\t\t// 3n回目にも更新があるなら負の閉路が存在する",
 								"\t\t\t\t\tif(i == V - 1)return true;",
 							"\t\t\t\t}",
 						"\t\t\t}",
@@ -1258,8 +1304,111 @@
 			"\t\t}",
 			"\t\tcout << endl;",
 			"\t}",
-			"}"
+			"};",
 		],
 		"description": "強連結成分分解"
+	},
+	"CoordinateCompression": {
+		"prefix": "CoordinateCompression",
+		"body": [
+			"class Compress{",
+			"public:",
+			"\tint before_W, before_H, N;",
+			"\tvi before_X1, before_X2, before_Y1, before_Y2;",
+			"\tint after_W, after_H;",
+			"\tvi after_X1, after_X2, after_Y1, after_Y2;",
+			"\t",
+			"\t// (x1,y1) -> (x2, y2) の直線上のマスが塗られているとする",
+			"\t// 点の場合は (x1,y1) == (x2, y2) とする",
+			"\t// 四角形の場合は直線の集合とする",
+			"\tCompress(int max_h, int max_w, int n, vi x1, vi x2, vi y1, vi y2) {",
+			"\t\tbefore_H = max_h;",
+			"\t\tbefore_W = max_w;",
+			"\t\tN = n;",
+			"\t\tbefore_X1 = x1;",
+			"\t\tbefore_X2 = x2;",
+			"\t\tbefore_Y1 = y1;",
+			"\t\tbefore_Y2 = y2;",
+			"\t\tafter_X1 = vi(max_w);",
+			"\t\tafter_X2 = vi(max_w);",
+			"\t\tafter_Y1 = vi(max_h);",
+			"\t\tafter_Y2 = vi(max_h);",
+			"\t}",
+			"",
+			"\tvoid compress() {",
+			"\t\tafter_W = exec_compress(before_X1, before_X2, after_X1, after_X2, before_W, \"width\");",
+			"\t\tafter_H = exec_compress(before_Y1, before_Y2, after_Y1, after_Y2, before_H, \"height\");",
+			"\t}",
+			"",
+			"\tvoid before_show() {",
+			"\t\tvvc v(before_H, vc(before_W, '_'));",
+			"\t\tcout << \"H = \" << before_H << \", W = \" << before_W << endl;",
+			"\t\tfor(int i = 0; i < N; i++) {",
+			"\t\t\tfor(int y = before_Y1[i]; y <= before_Y2[i]; y++) {",
+			"\t\t\t\tfor(int x = before_X1[i]; x <= before_X2[i]; x++) {",
+			"\t\t\t\t\tv[y][x] = '#';",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\trep(i, before_H){",
+			"\t\t\trep(j, before_W){",
+			"\t\t\t\tcout << v[i][j];",
+			"\t\t\t}",
+			"\t\t\tcout<<endl;",
+			"\t\t}",
+			"\t\tcout << endl;",
+			"\t}",
+			"",
+			"\tvoid after_show() {",
+			"\t\tvvc v(after_H, vc(after_W, '_'));",
+			"\t\tcout << \"H = \" << after_H << \", W = \" << after_W << endl;",
+			"\t\tfor(int i = 0; i < N; i++) {",
+			"\t\t\tfor(int y = after_Y1[i]; y <= after_Y2[i]; y++) {",
+			"\t\t\t\tfor(int x = after_X1[i]; x <= after_X2[i]; x++) {",
+			"\t\t\t\t\tv[y][x] = '#';",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\trep(i, after_H){",
+			"\t\t\trep(j, after_W){",
+			"\t\t\t\tcout << v[i][j];",
+			"\t\t\t}",
+			"\t\t\tcout<<endl;",
+			"\t\t}",
+			"\t\tcout << endl;",
+			"\t}",
+			"",
+			"private:",
+			"\tint exec_compress(vi &z1, vi &z2, vi &aft_z1, vi &aft_z2, int max_len, string mode) {",
+			"\t\tvector<int> zs;",
+			"\t\tfor(int i = 0; i < N; i++) {",
+			"\t\t\tif(z1[i] > z2[i]) swap(z1[i], z2[i]);",
+			"",
+			"\t\t\tzs.push_back(z1[i]);",
+			"\t\t\tzs.push_back(z2[i]);",
+			"",
+			"\t\t\tif(mode == \"width\") {",
+			"\t\t\t\tif(z2[i] + 1 <= max_len) zs.push_back(z2[i] + 1);",
+			"\t\t\t} else if(mode == \"height\") {",
+			"\t\t\t\tif(0 < z1[i] - 1) zs.push_back(z1[i] - 1);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tzs.push_back(1);",
+			"\t\tzs.push_back(max_len);",
+			"",
+			"\t\tsort(zs.begin(), zs.end());",
+			"\t\tzs.erase(unique(zs.begin(), zs.end()), zs.end());",
+			"",
+			"\t\tfor(int i = 0; i < N; i++) {",
+			"\t\t\taft_z1[i] = find(zs.begin(), zs.end(), z1[i]) - zs.begin() + 1;",
+			"\t\t\taft_z2[i] = find(zs.begin(), zs.end(), z2[i]) - zs.begin() + 1;",
+			"\t\t}",
+			"\t\treturn zs.size();",
+			"\t}",
+			"};"
+		],
+		"description": "二次元座標圧縮"
 	}
 }
+
+
